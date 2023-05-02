@@ -1,19 +1,15 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Message extends Model {}
+class Member extends Model {}
 
-Message.init(
+Member.init(
     {
-        id: {
+        id: { 
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true,
-        },
-        content: {
-            type: DataTypes.STRING,
-            allowNull: false,
         },
         room_id: {
             type: DataTypes.INTEGER,
@@ -22,16 +18,16 @@ Message.init(
                 key: 'id',
             },
         },
-        author_id: {
+        member_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
                 key: 'id',
             },
         },
-        sent_at: {
-            type: DataTypes.TIME,
-            allowNull: false,
+        role: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
     },
     {
@@ -39,8 +35,8 @@ Message.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'message',
+        modelName: 'member',
     }
 );
 
-module.exports = Message;
+module.exports = Member;
