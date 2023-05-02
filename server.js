@@ -9,6 +9,22 @@ app.set('view engine', 'handlebars');
 // Serve static files
 app.use(express.static('public'));
 
+// Import routes
+const HomeRoutes = require('./routes/home');
+app.use(HomeRoutes);
+
+const projectRoutes = require('./routes/project');
+app.use(projectRoutes);
+
+const communicationsRoutes = require('./routes/communication');
+app.use(communicationsRoutes);
+
+const calendarRoutes = require('./routes/calendar');
+app.use(calendarRoutes);
+
+const fileTabRoutes = require('./routes/fileTab');
+app.use(fileTabRoutes);
+
 // Add your routes
 app.get('/', (req, res) => {
 	res.render('home', {
