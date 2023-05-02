@@ -1,0 +1,44 @@
+{{!-- * structure for the home page --}}
+
+
+{{#> main}}
+
+<header>
+    <div class="header-content">
+        <h1>Online Study Group</h1>
+        <div class="user-profile">
+            <span>{{username}}</span>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+</header>
+
+<nav>
+    <button>Create New Study Group</button>
+    <input type="text" placeholder="Search study groups" id="search">
+    <ul>
+        {{#each studyGroups}}
+        <li>{{this.name}}</li>
+        {{/each}}
+    </ul>
+</nav>
+
+<main>
+    <section class="study-group-info">
+        <!-- Add study group info elements -->
+    </section>
+    
+    <section class="chat">
+        <!-- Add chat elements -->
+    </section>
+
+    <section class="shared-resources">
+        <!-- Add shared resources elements -->
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2023 Online Study Group. All rights reserved.</p>
+</footer>
+
+{{/main}}
