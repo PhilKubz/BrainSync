@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS brainsync_db;
+CREATE DATABASE brainsync_db;
