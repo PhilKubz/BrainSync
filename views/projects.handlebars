@@ -1,0 +1,16 @@
+{{!--  unordered list of projects that can expand to show the files in that project --}}
+
+{{#each projects}}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="projectHeading{{@index}}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#projectCollapse{{@index}}" aria-expanded="false" aria-controls="projectCollapse{{@index}}">
+        {{name}}
+      </button>
+    </h2>
+    <div id="projectCollapse{{@index}}" class="accordion-collapse collapse" aria-labelledby="projectHeading{{@index}}" data-bs-parent="#projectsAccordion">
+      <div class="accordion-body">
+        {{> files projectFiles=files}}
+      </div>
+    </div>
+  </div>
+{{/each}}
