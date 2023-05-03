@@ -1,0 +1,26 @@
+* {
+    font-family: 'Arvo', serif;
+}
+
+.big-light-pink {
+    background-color: lightgray;
+}
+
+.navbar {
+    background-color: #ffc0cb;
+    color: #000000;
+}
+
+.btn-light-pink {
+    background-color: #ffc0cb;
+    color: #000000;
+}
+
+.btn-light-pink:hover {
+    background-color: #ff99b3;
+}
+
+
+.input-group {
+    max-width: 400px;
+  }

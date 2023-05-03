@@ -1,16 +1,43 @@
-{{!--  unordered list of projects that can expand to show the files in that project --}}
-
-{{#each projects}}
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="projectHeading{{@index}}">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#projectCollapse{{@index}}" aria-expanded="false" aria-controls="projectCollapse{{@index}}">
-        {{name}}
-      </button>
-    </h2>
-    <div id="projectCollapse{{@index}}" class="accordion-collapse collapse" aria-labelledby="projectHeading{{@index}}" data-bs-parent="#projectsAccordion">
-      <div class="accordion-body">
-        {{> files projectFiles=files}}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="outer-container">
+        <header class="fixed-top rounded">
+            <div class="container py-3 text-center">
+              <div class="border rounded p-2">
+              <h2>Projects</h2>
+            </div>
+          </div>
+        </header>
+      <div class="container mt-5">
+        <div class="mb-3" id="projectsAccordion">
+          {{#each projects}}
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="projectHeading{{@index}}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#projectCollapse{{@index}}" aria-expanded="false" aria-controls="projectCollapse{{@index}}">
+                  {{name}}
+                </button>
+              </h2>
+              <div id="projectCollapse{{@index}}" class="accordion-collapse collapse" aria-labelledby="projectHeading{{@index}}" data-bs-parent="#projectsAccordion">
+                <div class="accordion-body">
+                  {{> files projectFiles=files}}
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
       </div>
     </div>
-  </div>
-{{/each}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
