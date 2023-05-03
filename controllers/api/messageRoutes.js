@@ -1,6 +1,6 @@
 // necessary dependencies and models
 const router = require('express').Router();
-const {Member, Message, Room, User} = require('../../models');
+const {Message, User} = require('../../models');
 
 //route to display messages from a given room
 router.get('/', async (req, res) => {
@@ -25,6 +25,27 @@ router.get('/', async (req, res) => {
 });
 
 //route to post message in a given room
-router.post('/', passport.authenticate('jwt', {session: false}) async (req, res) => {
+//passport.authenticate with json web token may not be necessary. cant remove. Also may need to specify which room is being posted in in the path.
+router.post('/', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try{
         const newMessage = await Message.create(req.body)
+        res.status(201).json(newMessage);
+        }
+        catch (err) {
+            res.status(500).json(err);
+            }
+            });
+
+//route to delete message by id
+router.delete('/:id', async (req, res) => {
+    try{
+        const messageId = req.params.id;
+        const message = await Message.findByPk(messageId);
+        await message.destroy();
+        res.status(204).json();
+        }
+        catch (err) {
+            res.status(500).json(err);
+        }
+        });
+
