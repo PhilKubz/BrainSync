@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Phillip",
+        "userName": "Phill",
+        "email": "phillip@gmail.com",
+        "password": "password12345"
+    },
+    {
+        "name": "Monique",
+        "userName": "Mo",
+        "email": "monique@gmail.com",
+        "password": "password12345"
+    },
+    {
+        "name": "Noah",
+        "userName": "Minecraft",
+        "email": "noah@gmail.com",
+        "password": "password12345"
+    },
+    {
+        "name": "Brian",
+        "userName": "Morse",
+        "email": "brian@gmail.com",
+        "password": "password12345"
+    },
+    {
+        "name": "Aaron",
+        "userName": "Double-A",
+        "email": "aaron@gmail.com",
+        "password": "password12345"
+    }
+]
