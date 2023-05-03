@@ -1,5 +1,6 @@
 {{!--  unordered list of projects that can expand to show the files in that project --}}
-
+<div class="leftSideBar projectContainer">
+<div class="container">
 {{#each projects}}
   <div class="accordion-item">
     <h2 class="accordion-header" id="projectHeading{{@index}}">
@@ -14,3 +15,19 @@
     </div>
   </div>
 {{/each}}
+</div>
+</div>
+<div class="container">
+  {{#each files}}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {{name}}
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
