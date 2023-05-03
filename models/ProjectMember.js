@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Message extends Model {}
+class ProjectMember extends Model {}
 
-Message.init(
+ProjectMember.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,27 +11,23 @@ Message.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        content: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        room_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'room',
-                key: 'id',
-            },
-        },
-        author_id: {
+        member_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
                 key: 'id',
             },
         },
-        sent_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
+        project_id: {
+            type: DataTypes.STRING,
+            references: {
+                model: 'Project',
+                key: 'id',
+            },
+        },
+        role: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
     },
     {
@@ -39,8 +35,8 @@ Message.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'message',
+        modelName: 'projectmember',
     }
 );
 
-module.exports = Message;
+module.exports = ProjectMember;
