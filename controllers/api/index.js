@@ -9,4 +9,4 @@ router.use('/members', memberRoutes);
 router.use('/messages', messageRoutes);
 router.use('/rooms', roomRoutes);
 
-module.exports = router
+module.exports = router;
