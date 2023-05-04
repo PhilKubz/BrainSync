@@ -7,7 +7,9 @@ const hbs = exphbs.create({});
 // Implement our connection config
 const sequelize = require('./config/connection');
 
-const app = express();
+const app = express(); const dotenv = require('dotenv');
+dotenv.config();
+
 
 // Set handlebars as the default engine
 app.engine('handlebars', hbs.engine);
@@ -24,6 +26,10 @@ app.use(projectRoutes);
 
 const calendarRoutes = require('./routes/calendar');
 app.use(calendarRoutes);
+
+const authRoutes = require('./controllers/dropboxAuthController');
+app.use('/auth', authRoutes);
+
 
 // Add your routes
 app.get('/', (req, res) => {
