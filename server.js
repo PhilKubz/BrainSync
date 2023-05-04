@@ -1,9 +1,16 @@
+// Dependencies
+const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
+const hbs = exphbs.create({});
+
+// Implement our connection config
+const sequelize = require('./config/connection');
 
 const app = express();
 
-app.engine('handlebars', exphbs());
+// Set handlebars as the default engine
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // Serve static files
@@ -33,5 +40,5 @@ app.get('/', (req, res) => {
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-	console.log(`Server started on port ${PORT}`);
+	console.log(`Server started on port: ${PORT}`);
 });

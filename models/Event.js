@@ -1,46 +1,39 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Message extends Model {}
+class Event extends Model {}
 
-Message.init(
+Event.init(
     {
-        id: {
+        id: { 
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true,
         },
-        content: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        room_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'room',
-                key: 'id',
-            },
-        },
-        author_id: {
+        user_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
                 key: 'id',
             },
         },
-        sent_at: {
+        date: {
             type: DataTypes.DATE,
             allowNull: false,
-        },
+        }
     },
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'message',
+        modelName: 'event',
     }
 );
 
-module.exports = Message;
+module.exports = Event;
