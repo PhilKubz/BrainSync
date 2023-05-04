@@ -7,11 +7,12 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 // Serve static files
+app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 
 // Import routes
 
-const projectRoutes = require('./routes/project');
+const projectRoutes = require('./routes/projects');
 app.use(projectRoutes);
 
 const calendarRoutes = require('./routes/calendar');
