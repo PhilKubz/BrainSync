@@ -36,10 +36,10 @@ router.post('/', passport.authenticate('jwt', {session: false}), async (req, res
             }
             });
 
-//route to delete message by id
+//route to delete message by id, will likely need to add event listener to front end js to provide selected message's id to the route when delete button is pushed
 router.delete('/:id', async (req, res) => {
     try{
-        const messageId = req.params.id;
+        const messageId = req.body.id;
         const message = await Message.findByPk(messageId);
         await message.destroy();
         res.status(204).json();
