@@ -30,8 +30,9 @@ app.use(projectRoutes);
 const calendarRoutes = require('./routes/calendar');
 app.use(calendarRoutes);
 
-const authRoutes = require('./controllers/dropboxAuthController');
+const authRoutes = require('./controllers/dropbox-auth-controller');
 app.use('/auth', authRoutes);
+
 
 // Add your routes
 app.get('/', (req, res) => {
