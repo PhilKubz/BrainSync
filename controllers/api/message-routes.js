@@ -1,6 +1,7 @@
 // necessary dependencies and models
 const router = require('express').Router();
-const {Message, User} = require('../../models');
+const {Message, User, Room} = require('../../models');
+const withAuth = require('../utils/auth');
 
 // the api/message endpoint
 
