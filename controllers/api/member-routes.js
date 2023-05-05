@@ -1,6 +1,7 @@
 // necessary dependencies and models
 const router = require('express').Router();
-const {Member, User} = require('../../models');
+const {Member, User, Room} = require('../../models');
+const withAuth = require('../utils/auth');
 
 //route to obtain all members of a given group
 router.get('/', async (req, res) => {

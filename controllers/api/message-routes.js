@@ -1,6 +1,7 @@
 // necessary dependencies and models
 const router = require('express').Router();
-const {Message, User} = require('../../models');
+const {Message, User, Room} = require('../../models');
+const withAuth = require('../utils/auth');
 
 //route to display messages from a given room
 router.get('/', async (req, res) => {
