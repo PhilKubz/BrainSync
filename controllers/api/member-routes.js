@@ -3,6 +3,8 @@ const router = require('express').Router();
 const {Member, User, Room} = require('../../models');
 const withAuth = require('../utils/auth');
 
+// the api/member endpoint
+
 //route to obtain all members of a given group
 router.get('/', async (req, res) => {
     try{

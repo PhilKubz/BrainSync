@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const userRoutes = require('./userRoutes');
-const memberRoutes = require('./memberRoutes');
-const messageRoutes = require('./messageRoutes');
-const roomRoutes = require('./roomRoutes');
+const userRoutes = require('./user-routes');
+const memberRoutes = require('./member-routes');
+const messageRoutes = require('./message-routes');
+const roomRoutes = require('./room-routes');
 
 router.use('/users', userRoutes);
 router.use('/members', memberRoutes);
