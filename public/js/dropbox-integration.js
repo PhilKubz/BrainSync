@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
 	// Add your Dropbox access token here
-	const accessToken = 'YOUR_ACCESS_TOKEN';
+	const accessToken = process.env.CALLBACK_URL;
+
 
 	// Initialize Dropbox API client
 	const dbx = new Dropbox.Dropbox({ accessToken, fetch });
