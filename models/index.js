@@ -45,4 +45,4 @@ Project.hasMany(ProjectMember, {
 
 
 
-module.exports = {User, Room, Message, Member};
+module.exports = {User, Room, Message, Member, Project, ProjectMember};
