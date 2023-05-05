@@ -10,17 +10,14 @@ const sequelize = require('./config/connection');
 const app = express(); const dotenv = require('dotenv');
 dotenv.config();
 
-
 // Set handlebars as the default engine
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // Serve static files
-app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 
 // Import routes
-
 const projectRoutes = require('./routes/projects');
 app.use(projectRoutes);
 
@@ -29,7 +26,6 @@ app.use(calendarRoutes);
 
 const authRoutes = require('./controllers/dropboxAuthController');
 app.use('/auth', authRoutes);
-
 
 // Add your routes
 app.get('/', (req, res) => {

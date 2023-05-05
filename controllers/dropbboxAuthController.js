@@ -3,9 +3,9 @@ const router = express.Router();
 const passport = require('passport');
 const DropboxStrategy = require('passport-dropbox-oauth2').Strategy;
 
-const DROPBOX_APP_KEY = 'YOUR_APP_KEY';
-const DROPBOX_APP_SECRET = 'YOUR_APP_SECRET';
-const CALLBACK_URL = 'http://localhost:3000/auth/dropbox/callback'; // Replace with your callback URL
+const DROPBOX_APP_KEY = process.env.DROPBOX_APP_KEY;
+const DROPBOX_APP_SECRET = process.env.DROPBOX_APP_SECRET;
+const CALLBACK_URL = process.env.CALLBACK_URL;
 
 passport.use(new DropboxStrategy({
 	clientID: DROPBOX_APP_KEY,
