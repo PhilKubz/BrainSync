@@ -1,15 +1,16 @@
-// Dependencies
 const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const hbs = exphbs.create({});
 const bodyParser = require('body-parser');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 // Implement our connection config
 const sequelize = require('./config/connection');
 
-const app = express(); const dotenv = require('dotenv');
-dotenv.config();
+const app = express();
 
 // body-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
