@@ -4,9 +4,9 @@ const memberRoutes = require('./member-routes');
 const messageRoutes = require('./message-routes');
 const roomRoutes = require('./room-routes');
 
-router.use('/users', userRoutes);
+/*router.use('/users', userRoutes);
 router.use('/members', memberRoutes);
 router.use('/messages', messageRoutes);
-router.use('/rooms', roomRoutes);
+router.use('/rooms', roomRoutes);*/
 
 module.exports = router;
