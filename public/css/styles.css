@@ -2,6 +2,19 @@
     font-family: 'Arvo', serif;
 }
 
+.outmost-container {
+    height: 100vh;
+    background: linear-gradient(to bottom, rgb(189, 172, 172), rgb(50, 49, 49));
+    background-size: cover;
+    background-position: center;
+    padding-top: 5vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+.container {
+    background: rgb(225, 205, 208);
+}
 .big-light-pink {
     background-color: lightgray;
 }
@@ -21,6 +34,22 @@
 }
 
 
-.input-group {
-    max-width: 400px;
+.outer-container {
+    padding-top: 5vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+.border {
+    display: inline-block;
+  }
+
+.header-box {
+    background-color: #ffc0cb;
+    color: #000000;
+}
+
+.container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
   }
