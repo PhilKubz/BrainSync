@@ -2,6 +2,8 @@
 const router = require('express').Router();
 const {Member, User, Room, Message} = require('../../models');
 
+// the api/room endpoint
+
 //route to display all rooms
 router.get('/', async (req, res) => {
     
