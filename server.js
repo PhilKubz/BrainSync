@@ -3,12 +3,17 @@ const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const hbs = exphbs.create({});
+const bodyParser = require('body-parser');
 
 // Implement our connection config
 const sequelize = require('./config/connection');
 
 const app = express(); const dotenv = require('dotenv');
 dotenv.config();
+
+// body-parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Set handlebars as the default engine
 app.engine('handlebars', hbs.engine);
