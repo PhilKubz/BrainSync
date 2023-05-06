@@ -1,53 +1,60 @@
 const path = require('path');
 const express = require('express');
+const session = require('express-session');
+const routes = require('./controllers');
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({});
+const helpers = require('./utils/helpers');
 const bodyParser = require('body-parser');
-
 const dotenv = require('dotenv');
+
 dotenv.config();
+
 
 // Implement our connection config
 const sequelize = require('./config/connection');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
+const PORT = process.env.PORT || 3001;
 
-// body-parser middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
+//Set up Handlebars.js engine with custom helpers
+const hbs = exphbs.create({helpers});
+
+const sess = {
+	secret: 'The brain is fascinating',
+	cookie: {
+		maxAge:300000,
+		httpOnly: true,
+		secure: false,
+    	sameSite: 'strict',
+	},
+	resave: false,
+  	saveUninitialized: true,
+  	store: new SequelizeStore({
+    	db: sequelize
+  	})
+};
+
+app.use(session(sess));
+
 
 // Set handlebars as the default engine
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-// Serve static files
-app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Import routes
-const projectRoutes = require('./routes/projects');
-app.use(projectRoutes);
+// body-parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-const calendarRoutes = require('./routes/calendar');
-app.use(calendarRoutes);
-
-const authRoutes = require('./routes/dropbox-auth-controller');
-app.use('/auth', authRoutes);
-
-
-// Add your routes
-app.get('/', (req, res) => {
-	res.render('home', {
-		username: 'John Doe',
-		studyGroups: [
-			{ name: 'Math 101' },
-			{ name: 'Physics 202' },
-			{ name: 'Chemistry 303' }
-		]
-	});
-});
+app.use(routes);
 
 // Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-	console.log(`Server started on port: ${PORT}`);
+sequelize.sync({ force: false }).then(() => {
+	app.listen(PORT, () => console.log('Now listening'));
 });
+

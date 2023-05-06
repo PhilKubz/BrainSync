@@ -19,7 +19,7 @@ ProjectMember.init(
             },
         },
         project_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             references: {
                 model: 'Project',
                 key: 'id',

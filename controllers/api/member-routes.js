@@ -1,6 +1,9 @@
 // necessary dependencies and models
 const router = require('express').Router();
-const {Member, User} = require('../../models');
+const {Member, User, Room} = require('../../models');
+const withAuth = require('../../utils/auth');
+
+// the api/member endpoint
 
 //route to obtain all members of a given group
 router.get('/', async (req, res) => {
@@ -82,3 +85,5 @@ router.put('/:id', async (req, res) => {
             res.status(500).json(err);
         }
     });
+
+    module.exports = router;

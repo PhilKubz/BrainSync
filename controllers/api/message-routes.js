@@ -1,6 +1,9 @@
 // necessary dependencies and models
 const router = require('express').Router();
-const {Message, User} = require('../../models');
+const {Message, User, Room} = require('../../models');
+const withAuth = require('../../utils/auth');
+
+// the api/message endpoint
 
 //route to display messages from a given room
 router.get('/', async (req, res) => {
@@ -26,7 +29,7 @@ router.get('/', async (req, res) => {
 
 //route to post message in a given room
 //passport.authenticate with json web token may not be necessary. cant remove. Also may need to specify which room is being posted in in the path.
-router.post('/', passport.authenticate('jwt', {session: false}), async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     try{
         const newMessage = await Message.create(req.body)
         res.status(201).json(newMessage);
@@ -49,3 +52,4 @@ router.delete('/:id', async (req, res) => {
         }
         });
 
+        module.exports = router;

@@ -1,12 +1,14 @@
-// Import necessary dependencies
-const express = require('express');
-const router = express.Router();
-
-// Handle user logout
-router.get('/logout', (req, res) => {
-	req.logout();
-	req.flash('success_msg', 'You are logged out');
-	res.redirect('/login');
-});
-
-module.exports = router;
+const logout = async () => {
+	const response = await fetch('/api/users/logout', {
+	  method: 'POST',
+	  headers: { 'Content-Type': 'application/json' },
+	});
+  
+	if (response.ok) {
+	  document.location.replace('/');
+	} else {
+	  alert(response.statusText);
+	}
+  };
+  
+  document.querySelector('#logout').addEventListener('click', logout);
