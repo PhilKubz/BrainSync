@@ -24,7 +24,11 @@ router.get('/dropbox/callback',
 	passport.authenticate('dropbox', { failureRedirect: '/login' }),
 	function (req, res) {
 		// Successful authentication, redirect to the files page.
-		res.redirect('/files');
+		res.redirect('http://localhost:3001/filesTab');
 	});
+
+router.get('/filesTab', function (req, res, next) {
+	res.redirect('http://localhost:3001/filesTab');
+});
 
 module.exports = router;
