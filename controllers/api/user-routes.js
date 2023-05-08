@@ -6,15 +6,17 @@ const { User, Member, Room, Message } = require('../../models');
 //route to log in
 router.post('/login', async (req, res) => {
     try {
+      //finds the user that matches posted e-mail address
       const userData = await User.findOne({ where: { email: req.body.email } });
   
+
       if (!userData) {
         res
           .status(400)
           .json({ message: 'Incorrect email or password, please try again' });
         return;
       }
-  
+      // verifies the posted password against passwords stored in the database
       const validPassword = await userData.checkPassword(req.body.password);
   
       if (!validPassword) {
@@ -26,7 +28,7 @@ router.post('/login', async (req, res) => {
   
       req.session.save(() => {
         req.session.user_id = userData.id;
-        req.session.username = userData.username;
+        req.session.username = userData.userName;
         req.session.logged_in = true;
         
         res.json({ user: userData, message: 'You are now logged in!' });
@@ -61,7 +63,7 @@ router.get('/', async (req, res) => {
 //route to display user by id
 router.get('/:id', async (req, res) => {
     try{
-        const user = await User.findById(req.params.id);
+        const user = await User.findByPk(req.params.id);
         res.status(200).json(user);
         }catch(err){
             res.status(500).json(err);
@@ -72,6 +74,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try{
         const user = await User.create(req.body);
+        console.log(req.body);
         res.status(201).json(user);
         }catch(err){
             res.status(500).json(err);
