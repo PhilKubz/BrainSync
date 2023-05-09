@@ -42,7 +42,7 @@ $(document).jquery(function () {
 const messageFormHandler = async (event) => {
   event.preventDefault();
 
-  const author_id = session.user_id;
+  const author_id = document.querySelector('#author-details').value;
   const room_id = document.querySelector('#room-details').value;
   const content = document.querySelector('#userMessageInput').value;
   const sent_at = new Date();

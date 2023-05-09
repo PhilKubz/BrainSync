@@ -3,7 +3,8 @@
   <header class="container rounded">
     <div class="py-2 text-center">
       <div class="border rounded p-2">
-        <h2>{{roomDetails.name}}</h2>
+        <h2>{{roomName}}</h2>
+        <h2><a href="">settings</a></h2>
       </div>
     </div>
   </header>
@@ -29,7 +30,8 @@
       <div class="col">
         <input type="text" class="form-control" id="userMessageInput" placeholder="(Type your message)"/>
       </div>
-      <input class=".d-none" value="{{roomDetails.id}}" id="room-details">
+      <input type="hidden" value="{{roomId}}" id="room-details">
+      <input type="hidden" value="{{user_id}}" id="author-details">
       <div class="col-auto">
         <button type="submit" class="btn btn-primary" id="sendButton">
           Send
@@ -38,5 +40,4 @@
     </div>
   </form>
 </div>
-
-<script>'./js/chat.js'</script>
+<script src="/js/chat.js"></script>
