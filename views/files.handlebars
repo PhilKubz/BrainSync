@@ -8,52 +8,55 @@
     <!-- Include Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Include custom CSS if needed -->
+
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-	<button id="dropbox-login-btn" class="btn btn-info" onclick="location.href='/auth/dropbox'">Sign in with Dropbox</button>
-	<div id="files-container" class="files-container"></div>
+	  <div class="files-container">
+    <button id="dropbox-login-btn" class="btn btn-info" onclick="location.href='/auth/dropbox'">Sign in with
+      Dropbox</button>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-4">
-
-                <!-- Side panel for folders and file actions -->
-				<div class="d-flex flex-column h-100">
-    				<div class="d-flex justify-content-between align-items-center mb-2">
-    				    <h5>Folders</h5>
-    				    <button id="create-folder-btn" class="btn btn-primary btn-sm">Create Folder</button>
-    				</div>
-    				<div class="folders-container mb-2">
-    				    <!-- Folders will be dynamically populated here -->
-						{{!-- sort files into different folders --}}
-						<select id="folder-select" class="form-select">
-  							<option value="" selected>Choose a folder...</option>
-						</select>
-    				</div>
-    				<div class="d-flex justify-content-between align-items-center mb-2">
-    				    <h5>Actions</h5>
-    				</div>
-    				<div class="d-flex flex-column">
-    				    <button id="upload-button" class="btn btn-primary">Upload File</button>
-						<input id="upload-input" type="file" style="display:none;">
-    				    <button id="create-file-btn" class="btn btn-secondary mb-2">Create File</button>
-    				</div>
-				</div>
+      <div class="row">
+        <div class="left-right">
+          <div class="col-4">
+            <!-- Side panel for folders and file actions -->
+            <div class="d-flex flex-column h-100">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5>Folders</h5>
+                <button id="create-folder-btn" class="btn btn-primary btn-sm">Create Folder</button>
+              </div>
+              <div class="folders-container mb-2">
+                <!-- Folders will be dynamically populated here -->
+                <select id="folder-select" class="form-select">
+                  <option value="" selected>Choose a folder...</option>
+                </select>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5>Actions</h5>
+              </div>
+              <div class="d-flex flex-column">
+                <button id="upload-button" class="btn btn-primary">Upload File</button>
+                <input id="upload-input" type="file" style="display:none;">
+                <button id="create-file-btn" class="btn btn-secondary mb-2">Create File</button>
+              </div>
             </div>
-            <div class="col-8">
-				<input type="file" id="file-input" class="form-control-file">
-				<button id="upload-file-btn" class="btn btn-primary">Upload File</button>
+          </div>
+          <div class="col-8">
+            <input type="file" id="file-input" class="form-control-file">
+            <button id="upload-file-btn" class="btn btn-primary">Upload File</button>
 
-                <!-- Container for file listing and preview -->
-				<div class="d-flex flex-column h-100">
-    				<h5>Files</h5>
-    				<div class="files-container">
-        <!-- Files will be dynamically populated here -->
-    				</div>
-				</div>
+            <!-- Container for file listing and preview -->
+            <div class="d-flex flex-column h-100">
+              <h5>Files</h5>
+              <div id="files-container" class="files-container">
+                <!-- Files will be dynamically populated here -->
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
     <!-- Include Bootstrap JavaScript Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -61,5 +64,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Include custom JavaScript for Dropbox integration -->
     <script src="/javascripts/dropboxIntegration.js"></script>
+	<!-- Include the Dropbox SDK -->
+	<script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
+
 </body>
 </html>
