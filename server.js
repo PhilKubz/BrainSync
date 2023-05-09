@@ -51,7 +51,12 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+	index: false,
+	immutable: true,
+	cacheControl: true,
+	maxAge: "30d"
+}));
 app.use("/images", express.static(path.join(__dirname, "/public/images")));
 
 // body-parser middleware
