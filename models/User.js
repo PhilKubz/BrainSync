@@ -54,7 +54,8 @@ User.init(
           sequelize,
           timestamps: false,
           freezeTableName: true,
-          underscored: true,
+          //changed this to false from true. The database field was not matching input from forms. 
+          underscored: false,
           modelName: 'user',
     }
 );
