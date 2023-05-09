@@ -1,22 +1,16 @@
 const router = require('express').Router();
-const { Room, User, Message, Project } = require('../models');
+const sequelize = require('../config/connection');
+const {Room, User, Message, Project, Member} = require('../models');
 const withAuth = require('../utils/auth');
-const passport = require('passport');
+const {QueryTypes} = require('sequelize');
 
 router.get('/', withAuth, async (req, res) => {
     try {
-        const userData = await User.findByPk(req.session.user_id, {
-            attributes: { exclude: ['password'] },
-            include: [
-                { model: Project, required: false },
-                { model: Room, required: false }]
-        });
-        console.log(userData);
-
-        const user = userData.get({ plain: true });
+        const userData = await sequelize.query(`SELECT user.userName, room.id, room.name FROM user LEFT JOIN member ON member.member_id = user.id JOIN room ON member.room_id = room.id where user.id = ${req.session.user_id}`, {type: QueryTypes.SELECT});
 
         res.render('home', {
-            logged_in: req.session.logged_in
+            userData,
+            logged_in: req.session.logged_in 
         });
     } catch (err) {
         res.status(500).send('Internal Server Error');

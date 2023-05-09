@@ -18,19 +18,27 @@ const seedDatabase = async () => {
         returning: true,
     });
 
+    let i = 0;
+
+    let members = [];
+
     for (const member of memberData) {
-        await Member.create({
+        const data = await Member.create({
             ...member,
             room_id: rooms[Math.floor(Math.random() * rooms.length)].id,
-            member_id: users[Math.floor(Math.random() * users.length)].id,
+            member_id: users[i].id
         });
+        console.log(data);
+        members.push(data.dataValues);
+        i++;
     }
 
     for (const message of messageData) {
+        let roomId = Math.floor(Math.random() * members.length);
         await Message.create({
             ...message,
-            room_id: rooms[Math.floor(Math.random() * rooms.length)].id,
-            author_id: users[Math.floor(Math.random() * users.length)].id,
+            room_id: members[roomId].room_id,
+            author_id: members[roomId].member_id,
             sent_at: new Date(),
         });
     }
