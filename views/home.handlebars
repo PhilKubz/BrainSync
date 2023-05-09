@@ -20,14 +20,14 @@
                 <!-- Add shared resources elements -->
             </section>
         </div>
-        {{#if rooms.length}}
+        {{#if userData.length}}
         <div class="col-6 px-8">
             <section class="chat container mt-4">
                 <div class="d-flex justify-content-center">
                     <button class="btn mr-2 btn-light-pink"><h4>Select your chatroom</h4></button>
                 </div>
                 <div class="p-3">
-                    {{#each rooms as |room|}}
+                    {{#each userData as |data|}}
                     <p>
                          <button type="button" class="btn btn-link">{{this.name}}</button>
                     </p>
