@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
 	// Add your Dropbox access token here
-	const accessToken = process.env.CALLBACK_URL;
+	const accessToken = process.env.DROPBOX_API_KEY;
 
 
 	// Initialize Dropbox API client
@@ -104,6 +104,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 		const fileName = prompt('Enter the name of the new file:');
 		if (!fileName) return;
 
-		// Add the necessary logic for creating a new file
+		document.getElementById('create-file-btn').addEventListener('click', async () => {
+			const fileName = prompt('Enter the name of the new file:');
+			if (!fileName) return;
+
+			try {
+				const response = await dbx.filesUpload({
+					path: `/${fileName}`,
+					contents: '',
+					autorename: true
+				});
+
+				alert('File created successfully');
+				listFiles();
+			} catch (error) {
+				alert(`Error creating file: ${error.message}`);
+			}
+		});
 	});
 });
