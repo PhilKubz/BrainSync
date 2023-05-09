@@ -1,132 +1,38 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Projects</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/public/css/styles.css">
-        <link href="https://fonts.googleapis.com/css2?family=Arvo" rel="stylesheet">
-    </head>
-  <body>
-    <div class="outer-container">
-        <header class="container rounded">
-            <div class="py-2 text-center">
-              <div class="border rounded p-2">
-              <h2>Communications</h2>
-            </div>
-          </div>
-        </header>
-        {{!
-            BUGS/PROBLEMS:
-                1. The friggin column reverse technique ain't working to have the scroll start at the bottom for the most recent message.
-                2. We don't have a chat input box setup at the bottom of the handlebar like "[type message box][send]"
-                3. Special font no working this way without style.css changes.
-        }}
-      <div class="container border mt-1 p-1" id="chatLog" style="overflow-y: auto; display: flex; flex-direction: column-reverse;">
-            {{#each chat}}
-            <div class="container border rounded px-2 py-1">
-                <div class="row p-2">
-                    <div class="col border rounded p-2" id="userName">
-                    {{userName}}
-                    </div>
-                    <div class="col-md-auto border rounded p-2" id="sentTime">
-                    {{sentTime}}
-                    </div>
-                </div>
-                <div class="col-md-auto border p-1 mx-3" id="userMessage" style="word-wrap: break-word;">
-                {{userMessage}}
-                </div>
-            </div>
-            {{/each}}
+<div class="outer-container">
+  <header class="container rounded">
+    <div class="py-2 text-center">
+      <div class="border rounded p-2">
+        <h2>Communications</h2>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
-
-<!--    This is something chat generated that would potnetially help, and allow socket.io
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projects</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="/public/css/styles.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Arvo"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="outer-container">
-      <header class="container rounded">
-        <div class="py-2 text-center">
-          <div class="border rounded p-2">
-            <h2>Communications</h2>
-          </div>
+  </header>
+  <div class="container border mt-1 p-1" id="chatLog" style="overflow-y: auto; display: flex; flex-direction: column-reverse;">
+    {{#each chat}}
+    <div class="container border rounded px-2 py-1">
+      <div class="row p-2">
+        <div class="col border rounded p-2" id="userName">
+          {{userName}}
         </div>
-      </header>
-      <div
-        class="container border mt-1 p-1"
-        id="chatLog"
-        style="overflow-y: auto; display: flex; flex-direction: column-reverse;"
-      >
-        {{#each chat}}
-        <div class="container border rounded px-2 py-1">
-          <div class="row p-2">
-            <div class="col border rounded p-2" id="userName">
-              {{userName}}
-            </div>
-            <div class="col-md-auto border rounded p-2" id="sentTime">
-              {{sentTime}}
-            </div>
-          </div>
-          <div
-            class="col-md-auto border p-1 mx-3"
-            id="userMessage"
-            style="word-wrap: break-word;"
-          >
-            {{userMessage}}
-          </div>
+        <div class="col-md-auto border rounded p-2" id="sentTime">
+          {{sentTime}}
         </div>
-        {{/each}}
       </div>
-      <form class="container mt-1">
-        <div class="row">
-          <div class="col">
-            <input
-              type="text"
-              class="form-control"
-              id="userNameInput"
-              placeholder="Enter your name"
-            />
-          </div>
-          <div class="col">
-            <input
-              type="text"
-              class="form-control"
-              id="userMessageInput"
-              placeholder="Type your message"
-            />
-          </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-primary" id="sendButton">
-              Send
-            </button>
-          </div>
-        </div>
-      </form>
+      <div class="col-md-auto border p-1 mx-3" id="userMessage" style="word-wrap: break-word;">
+        {{userMessage}}
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/socket.io@4.1.2/dist/socket.io.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/public/js/chat.js"></script>
-  </body>
-</html>
-
--->
+    {{/each}}
+  </div>
+  <form class="container p-4 flex-column fixed-bottom">
+    <div class="row">
+      <div class="col">
+        <input type="text" class="form-control" id="userMessageInput" placeholder="(Type your message)"/>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary" id="sendButton">
+          Send
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
