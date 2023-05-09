@@ -25,21 +25,21 @@ const io = require('socket.io')(http);*/
 
 
 //Set up Handlebars.js engine with custom helpers
-const hbs = exphbs.create({helpers});
+const hbs = exphbs.create({ helpers });
 
 const sess = {
 	secret: 'The brain is fascinating',
 	cookie: {
-		maxAge:300000,
+		maxAge: 300000,
 		httpOnly: true,
 		secure: false,
-    	sameSite: 'strict',
+		sameSite: 'strict',
 	},
 	resave: false,
-  	saveUninitialized: true,
-  	store: new SequelizeStore({
-    	db: sequelize
-  	})
+	saveUninitialized: true,
+	store: new SequelizeStore({
+		db: sequelize
+	})
 };
 
 app.use(session(sess));
@@ -65,9 +65,15 @@ app.use(bodyParser.json());
 
 app.use(routes);
 
-/*io.on('connection', () => {
-	console.log('a user is connected')
-});*/
+app.get('./public/css/styles.css', function (req, res) {
+	res.set('Content-Type', 'text/css');
+	res.sendFile(__dirname + '/public/css/styles.css');
+});
+
+app.get('./public/css/calendar.css', function (req, res) {
+	res.set('Content-Type', 'text/css');
+	res.sendFile(__dirname + '/public/css/calendar.css');
+});
 
 // Start the server
 sequelize.sync({ force: false }).then(() => {
