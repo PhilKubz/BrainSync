@@ -5,62 +5,11 @@ import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 
-
-// $('#calendar').fullCalendar({
-// 	header: {
-// 		left: 'prev,next today',
-// 		center: 'addEventButton',
-// 		right: 'month,agendaWeek,agendaDay,listWeek'
-// 	},
-// 	defaultDate: '2018-11-16',
-// 	navLinks: true,
-// 	editable: true,
-// 	eventLimit: true,
-// 	events: [{
-// 		title: 'Simple static event',
-// 		start: '2018-11-16',
-// 		description: 'Super cool event'
-// 	},
-
-// 	],
-// 	customButtons: {
-// 		addEventButton: {
-// 			text: 'Add new event',
-// 			click: function () {
-// 				var dateStr = prompt('Enter date in YYYY-MM-DD format');
-// 				var date = moment(dateStr);
-
-// 				if (date.isValid()) {
-// 					$('#calendar').fullCalendar('renderEvent', {
-// 						title: 'Dynamic event',
-// 						start: date,
-// 						allDay: true
-// 					});
-// 				} else {
-// 					alert('Invalid Date');
-// 				}
-
-// 			}
-// 		}
-// 	},
-// 	dayClick: function (date, jsEvent, view) {
-// 		var date = moment(date);
-
-// 		if (date.isValid()) {
-// 			$('#calendar').fullCalendar('renderEvent', {
-// 				title: 'Dynamic event from date click',
-// 				start: date,
-// 				allDay: true
-// 			});
-// 		} else {
-// 			alert('Invalid');
-// 		}
-// 	},
-// });
-var calendarstuff = document.addEventListener('DOMContentLoaded', function () {
-	var calendarEl = document.getElementById('calendar');
-
-	var calendar = new FullCalendar.Calendar(calendarEl, {
+document.addEventListener('DOMContentLoaded', function () {
+	const calendarEl = document.getElementById('calendar');
+	const calendar = new Calendar(calendarEl, {
+		plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin, bootstrapPlugin],
+		initialView: 'dayGridMonth',
 		timeZone: 'UTC',
 		themeSystem: 'bootstrap5',
 		headerToolbar: {
@@ -79,6 +28,40 @@ var calendarstuff = document.addEventListener('DOMContentLoaded', function () {
 			}
 		]
 	});
+
 	calendar.render();
+
+	const addButtonEl = document.createElement('button');
+	addButtonEl.innerText = 'Add new event';
+	addButtonEl.addEventListener('click', function () {
+		const dateStr = prompt('Enter date in YYYY-MM-DD format');
+		const date = moment(dateStr);
+
+		if (date.isValid()) {
+			const newEvent = {
+				title: 'Dynamic event',
+				start: date,
+				allDay: true
+			};
+
+			calendar.addEvent(newEvent);
+		} else {
+			alert('Invalid date');
+		}
+	});
+
+	calendar.setOption('customButtons', {
+		addEventButton: {
+			text: 'Add new event',
+			click: function () {
+				addButtonEl.click();
+			}
+		}
+	});
+
+	calendar.setOption('headerToolbar', {
+		left: 'prev,next today',
+		center: 'title',
+		right: 'addEventButton dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+	});
 });
-module.exports = calendarstuff;
