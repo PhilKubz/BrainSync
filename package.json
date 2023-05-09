@@ -29,12 +29,14 @@
     "express-handlebars": "^5.3.5",
     "express-session": "^1.17.1",
     "fullcalendar": "^6.1.6",
+    "http": "^0.0.1-security",
     "jquery": "^3.6.4",
     "moment": "^2.29.4",
     "mysql2": "^2.2.5",
     "passport": "^0.6.0",
     "pg": "^8.10.0",
-    "sequelize": "^6.31.1"
+    "sequelize": "^6.31.1",
+    "socket.io": "^4.6.1"
   },
   "devDependencies": {
     "eslint": "^7.12.1",

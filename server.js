@@ -1,5 +1,3 @@
-import { Server } from "socket.io";
-
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
@@ -9,8 +7,8 @@ const helpers = require('./utils/helpers');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 
-dotenv.config();
 
+dotenv.config();
 
 // Implement our connection config
 const sequelize = require('./config/connection');
@@ -20,7 +18,11 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 //socket.io Server
-const io = new Server(PORT);
+/*const http = require('http').Server(app);
+const io = require('socket.io')(http);*/
+
+
+
 
 //Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({helpers});
@@ -57,6 +59,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(routes);
+
+/*io.on('connection', () => {
+	console.log('a user is connected')
+});*/
 
 // Start the server
 sequelize.sync({ force: false }).then(() => {
