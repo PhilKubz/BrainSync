@@ -2,14 +2,16 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const {Room, User, Message, Project, Member} = require('../models');
 const withAuth = require('../utils/auth');
+const {QueryTypes} = require('sequelize');
 
 router.get('/', withAuth, async (req, res) => {
     try {
-        const userData = await sequelize.query('SELECT user.userName, ')
+        const userData = await sequelize.query(`SELECT user.userName, room.id, room.name FROM user LEFT JOIN member ON member.member_id = user.id JOIN room ON member.room_id = room.id where user.id = ${req.session.user_id}`, {type: QueryTypes.SELECT});
 
         console.log(userData);
 
         res.render('home', {
+            userData,
             logged_in: req.session.logged_in 
         });
     }catch(err){
