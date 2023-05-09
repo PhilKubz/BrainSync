@@ -20,9 +20,9 @@ const loginFormHandler = async (event) => {
 		alert(response.statusText);
 	  }
 	}
-  };
+};
   
-  const signupFormHandler = async (event) => {
+const signupFormHandler = async (event) => {
 	event.preventDefault();
   
 	const name = document.querySelector('#name-signup').value.trim();
@@ -43,13 +43,9 @@ const loginFormHandler = async (event) => {
 		alert(response.statusText);
 	  }
 	}
-  };
+};
   
-  document
-	.querySelector('.login-form')
-	.addEventListener('submit', loginFormHandler);
+document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
   
-  document
-	.querySelector('.signup-form')
-	.addEventListener('submit', signupFormHandler);
+document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
   

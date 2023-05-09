@@ -3,34 +3,35 @@
   <header class="container rounded">
     <div class="py-2 text-center">
       <div class="border rounded p-2">
-        <h2>Communications</h2>
+        <h2>{{roomName}}</h2>
+        <h2><a href="">settings</a></h2>
       </div>
     </div>
   </header>
   <div class="container border mt-1 p-1" id="chatLog" style="overflow-y: auto; display: flex; flex-direction: column-reverse;">
-    <!--
-    {{#each chat}}
+    {{#each messages as |message|}}
     <div class="container border rounded px-2 py-1">
       <div class="row p-2">
         <div class="col border rounded p-2" id="userName">
-          {{userName}}
+          {{message.userName}}
         </div>
         <div class="col-md-auto border rounded p-2" id="sentTime">
-          {{sentTime}}
+          {{message.sent_at}}
         </div>
       </div>
       <div class="col-md-auto border p-1 mx-3" id="userMessage" style="word-wrap: break-word;">
-        {{userMessage}}
+        {{message.content}}
       </div>
     </div>
     {{/each}}
-    -->
   </div>
-  <form class="container p-4 flex-column fixed-bottom">
+  <form class="container p-4 flex-column fixed-bottom" id="chatInput">
     <div class="row">
       <div class="col">
         <input type="text" class="form-control" id="userMessageInput" placeholder="(Type your message)"/>
       </div>
+      <input type="hidden" value="{{roomId}}" id="room-details">
+      <input type="hidden" value="{{user_id}}" id="author-details">
       <div class="col-auto">
         <button type="submit" class="btn btn-primary" id="sendButton">
           Send
@@ -39,3 +40,4 @@
     </div>
   </form>
 </div>
+<script src="/js/chat.js"></script>

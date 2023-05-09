@@ -24,11 +24,11 @@ router.post('/', withAuth, async (req, res) => {
     try{
         const newMessage = await Message.create(req.body)
         res.status(201).json(newMessage);
-        }
-        catch (err) {
-            res.status(500).json(err);
-            }
-            });
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 //route to delete message by id, will likely need to add event listener to front end js to provide selected message's id to the route when delete button is pushed
 router.delete('/:id', async (req, res) => {

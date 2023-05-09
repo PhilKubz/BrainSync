@@ -1,5 +1,3 @@
-import { Server } from "socket.io";
-
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
@@ -9,8 +7,8 @@ const helpers = require('./utils/helpers');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 
-dotenv.config();
 
+dotenv.config();
 
 // Implement our connection config
 const sequelize = require('./config/connection');
@@ -20,24 +18,28 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 //socket.io Server
-const io = new Server(PORT);
+/*const http = require('http').Server(app);
+const io = require('socket.io')(http);*/
+
+
+
 
 //Set up Handlebars.js engine with custom helpers
-const hbs = exphbs.create({helpers});
+const hbs = exphbs.create({ helpers });
 
 const sess = {
 	secret: 'The brain is fascinating',
 	cookie: {
-		maxAge:300000,
+		maxAge: 300000,
 		httpOnly: true,
 		secure: false,
-    	sameSite: 'strict',
+		sameSite: 'strict',
 	},
 	resave: false,
-  	saveUninitialized: true,
-  	store: new SequelizeStore({
-    	db: sequelize
-  	})
+	saveUninitialized: true,
+	store: new SequelizeStore({
+		db: sequelize
+	})
 };
 
 app.use(session(sess));
@@ -49,7 +51,12 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+	index: false,
+	immutable: true,
+	cacheControl: true,
+	maxAge: "30d"
+}));
 app.use("/images", express.static(path.join(__dirname, "/public/images")));
 
 // body-parser middleware
