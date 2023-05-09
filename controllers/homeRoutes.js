@@ -31,12 +31,12 @@ router.get('/calendar', withAuth, (req, res) => {
     res.render('calendar');
 });
 
-router.get('/auth/dropbox', passport.authenticate('dropbox-oauth2'));
-router.get('/auth/dropbox/callback',
+//router.get('/auth/dropbox', passport.authenticate('dropbox-oauth2'));
+/*router.get('/auth/dropbox/callback',
     passport.authenticate('dropbox-oauth2', { failureRedirect: '/login' }),
     (req, res) => {
         res.redirect('/');
-    });
+    });*/
 router.get('/login', (req, res) => {
     // If the user is already logged in, redirect the request to another route
     if (req.session.logged_in) {
