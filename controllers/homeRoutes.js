@@ -4,13 +4,15 @@ const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
     try {
-        /*const userData = await User.findByPk(req.session.user_id, {
+        const userData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] },
-            include: [{ model: Project }, { model: Room }]
+            include: [
+                { model: Project, required: false }, 
+                { model: Room, required: false}]
         });
         console.log(userData);
 
-        const user = userData.get({ plain: true });*/
+        const user = userData.get({ plain: true });
 
         res.render('home', {
             logged_in: req.session.logged_in 

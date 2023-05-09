@@ -1,3 +1,6 @@
+
+
+
 // api routes for rooms
 const router = require('express').Router();
 const {Member, User, Room, Message} = require('../../models');
@@ -9,6 +12,9 @@ router.get('/', async (req, res) => {
     
     try{
         const rooms = await Room.findall();
+        if(!rooms){
+            res.status(404).json({message: "No Rooms Found"});
+        }
         res.status(200).json(rooms);
     } catch (err) {
         res.status(500).json(err);
