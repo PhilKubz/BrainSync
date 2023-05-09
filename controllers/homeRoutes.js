@@ -1,18 +1,13 @@
 const router = require('express').Router();
-const {Room, User, Message, Project} = require('../models');
+const sequelize = require('../config/connection');
+const {Room, User, Message, Project, Member} = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
     try {
-        const userData = await User.findByPk(req.session.user_id, {
-            attributes: { exclude: ['password'] },
-            include: [
-                { model: Project, required: false }, 
-                { model: Room, required: false}]
-        });
-        console.log(userData);
+        const userData = await sequelize.query('SELECT user.userName, ')
 
-        const user = userData.get({ plain: true });
+        console.log(userData);
 
         res.render('home', {
             logged_in: req.session.logged_in 

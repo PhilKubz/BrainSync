@@ -1,25 +1,16 @@
 // necessary dependencies and models
 const router = require('express').Router();
+const sequelize = require('../../config/connection');
 const {Message, User, Room} = require('../../models');
 const withAuth = require('../../utils/auth');
+const {QueryTypes} = require('sequelize');
 
 // the api/message endpoint
 
 //route to display messages from a given room
 router.get('/', async (req, res) => {
     try{
-        const roomId = req.query.room_id;
-        const messages = await Message.findall({
-            where: {
-                roomId: roomId
-            },
-            include: {
-                model: User,
-                attributes: ['userName']
-            }, 
-            attributes: ['content', 'sent_at'],
-            order: [['sent_at', 'ASC']]        
-        });
+        const messages = await sequelize.query('SELECT message.id, message.content, message.sent_at, user.userName, room.name FROM message JOIN room ON room.id = message.room_id JOIN user ON user.id = message.author_id ORDER BY message.sent_at ASC', {type: QueryTypes.SELECT});
         res.status(200).json(messages)
     }
     catch (err) {
