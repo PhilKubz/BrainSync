@@ -1,11 +1,11 @@
-import { io } from "socket.io-client";
+/*import { io } from "socket.io-client";
 /*
     PROBLEMS:
         1. I have NO idea at this exact moment how to call SQL to get the user message itself, the username, or the time sent.
-*/
+
 const socket = io("ws://infinite-fjord-15703.herokuapp.com/communications");
 
-const chatLogEl = document.getElementById("chatLog");
+/*const chatLogEl = document.getElementById("chatLog");
 const userMessageEl = document.getElementById("userMessageInput");
 const sendButtonEl = document.getElementById("sendButton");
 
@@ -37,4 +37,31 @@ $(document).jquery(function () {
         $(chatLogEl).append(messageOutput);
         socket.emit(messageOutput);
     });
-});
+});*/
+
+const messageFormHandler = async (event) => {
+  event.preventDefault();
+
+  const author_id = session.user_id;
+  const room_id = document.querySelector('#room-details').value;
+  const content = document.querySelector('#userMessageInput').value;
+  const sent_at = new Date();
+
+  console.log("Handler accessed " + author_id, room_id, content, sent_at);
+
+  if (content){
+    const response = await fetch('/api/messages', {
+      method: 'POST',
+      body: JSON.stringify({content, room_id, author_id, sent_at}),
+      headers: { 'Content-Type': 'application/json'},
+    });
+
+    if (response.ok) {
+      document.location.replace(`/communications/${room_id}`);
+    } else {
+      alert(response.statusText);
+    }
+  }
+};
+
+document.querySelector('#chatInput').addEventListener('submit', messageFormHandler);

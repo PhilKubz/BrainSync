@@ -7,15 +7,17 @@ const {QueryTypes} = require('sequelize');
 router.get('/:id', withAuth, async (req, res) => {
     try {
         const messages = await sequelize.query(`SELECT message.id, message.content, message.sent_at, user.userName, room.name FROM message JOIN room ON room.id = message.room_id JOIN user ON user.id = message.author_id WHERE message.room_id = ${req.params.id} ORDER BY message.sent_at ASC`, {type: QueryTypes.SELECT});
-
+        const roomDetails = await sequelize.query(`SELECT room.id, room.name FROM room WHERE room.id = ${req.params.id}`, {type: QueryTypes.SELECT});
         res.render('communications', {
             messages,
+            roomDetails,
             logged_in: req.session.logged_in 
         })
     } catch(err){
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 
 module.exports = router;
