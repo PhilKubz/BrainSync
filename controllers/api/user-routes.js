@@ -73,7 +73,12 @@ router.get('/:id', async (req, res) => {
 //route to create a new user
 router.post('/', async (req, res) => {
     try{
-        const user = await User.create(req.body);
+        const user = await User.create({
+          name: req.body.name,
+          userName: req.body.username,
+          email: req.body.email,
+          password: req.body.password
+        });
         console.log(req.body);
         res.status(201).json(user);
         }catch(err){
