@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { cA } = require('@fullcalendar/core/internal-common');
+//const { cA } = require('@fullcalendar/core/internal-common');
 const sequelize = require('../config/connection');
 const {Room, User, Message, Project, Member} = require('../models');
 const withAuth = require('../utils/auth');
@@ -25,8 +25,27 @@ router.get('/:id', withAuth, async (req, res) => {
     }
 });
 
-router.get('/create-room', withAuth, async (req, res) => {
+router.get('/create/room', withAuth, async (req, res) => {
     res.render('roomCreation');
+});
+
+router.get('/:id/settings', withAuth, async (req, res) => {
+    try{
+        const members = await sequelize.query(`SELECT user.id, user.userName, member.role FROM room JOIN member ON member.room_id = room.id JOIN user ON user.id = member.member_id WHERE room.id = ${req.params.id}`, {type: QueryTypes.SELECT});
+
+        const roomRaw = await Room.findByPk(req.params.id);
+    
+        const room = roomRaw.get({plain: true});
+
+        console.log(room);
+    
+        res.render('roomSettings',{
+            members,
+            ...room
+        });
+    }catch(err){
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 

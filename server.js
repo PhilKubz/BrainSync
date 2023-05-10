@@ -30,7 +30,7 @@ const hbs = exphbs.create({ helpers });
 const sess = {
 	secret: 'The brain is fascinating',
 	cookie: {
-		maxAge: 300000,
+		maxAge:900000,
 		httpOnly: true,
 		secure: false,
 		sameSite: 'strict',

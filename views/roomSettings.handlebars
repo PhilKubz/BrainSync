@@ -1,0 +1,36 @@
+<div class="outer-container">
+  <header class="container rounded text-center">
+    <h2>Room Details</h2>
+    <div class="container p-4">
+        <form>
+            <label for="room-name">Room Name:</label>
+            <input id="room-name" type="text" class="form-input" placeholder="{{name}}">
+            <input id="room-id" type="hidden" value="{{id}}">
+            <button class="btn btn-primary" type="submit" id="room-update">Update</button>
+            <button class="btn btn-warning" type="submit" id="room-delete">Delete</button>
+        </form>
+        <h3>Add Member</h3>
+        <form class="row">
+            <label for="email">Enter email:</label>
+            <input type="text" name="email" id="user-email">
+            <button type="submit" class="btn btn-primary" id="member-create">Add</button>
+        </form>
+        <h2>Members</h2>
+        {{#each members as |member|}}
+        <form class="row">
+            <label>{{member.userName}}:</label>
+            <input type="hidden" value="member.id" id="member_id">
+            <label for="roles">Current Role: {{member.role}}</label>
+            <select id="role" name="roles" >
+                <option value="member">Member</option>
+                <option value="moderator">Moderator</option>
+                <option value="admin">Admin</option>
+            </select>
+            <button class="btn btn-primary" type="submit" id="member-delete">Update</button>
+            <button class="btn btn-warning" type="submit" id="member-update">Delete</button>
+        </form>
+        {{/each}}
+    </div>
+</div>
+
+<script src="/js/roomSettings.js"></script>
