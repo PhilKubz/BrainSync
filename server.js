@@ -65,7 +65,7 @@ app.use(bodyParser.json());
 
 app.use(routes);
 
-app.get('./public/css/styles.css', function (req, res) {
+/*app.get('./public/css/styles.css', function (req, res) {
 	res.set('Content-Type', 'text/css');
 	res.sendFile(__dirname + '/public/css/styles.css');
 });
@@ -73,7 +73,7 @@ app.get('./public/css/styles.css', function (req, res) {
 app.get('./public/css/calendar.css', function (req, res) {
 	res.set('Content-Type', 'text/css');
 	res.sendFile(__dirname + '/public/css/calendar.css');
-});
+});*/
 
 // Start the server
 sequelize.sync({ force: false }).then(() => {
