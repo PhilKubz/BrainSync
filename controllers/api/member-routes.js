@@ -1,5 +1,6 @@
 // necessary dependencies and models
 const router = require('express').Router();
+const sequelize = require('../../config/connection');
 const {Member, User, Room} = require('../../models');
 const withAuth = require('../../utils/auth');
 
@@ -27,30 +28,33 @@ router.get('/', async (req, res) => {
 
 // basic route to create new member. A method of verifying that the user creating a member is the
 // moderator will need to be added.
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     try{
-        const roomId = req.body.roomId;
+       
+        const userRaw = await sequelize.query(`SELECT user.id FROM user WHERE email = '${req.body.email}'`);
+        const room_id = req.body.room_id;
+        user = userRaw[0];
         const newMember = await Member.create({
-            ...req.body,
-            room_id: roomId
-        })
+            member_id: user[0].id,
+            room_id: room_id,
+            role: 'member'
+        });
+        console.log(newMember);
         res.status(201).json(newMember);
     }
     catch (err) {
         res.status(500).json(err);
         }
-        });
+    });
 
 // basic route to delete an existing member. A method of verifying that the user creating a member 
 // is the moderator will need to be added. 
 router.delete('/:id', async (req, res) => {
     try{
         const memberId = req.params.id;
-        const roomId = req.body.roomId;
         const member = await Member.findByPk({
             where: {
                 id: memberId,
-                room_id: roomId
             }
         });
 
