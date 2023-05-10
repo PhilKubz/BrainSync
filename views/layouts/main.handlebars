@@ -54,38 +54,53 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
 
   <!-- ! I have no idea how to get this to work in the public/js/calendar.js file -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const calendarEl = document.getElementById('calendar')
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const calendarEl = document.getElementById('calendar')
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+                      initialView: 'dayGridMonth',
+                aspectRatio: 3.5,
+                editable: true,
                 events: [
-          {
-            title: 'My Event',
-            start: '2022-05-10'
-          }
-        ]
-      })
-      calendar.render()
-
-      const addButtonEl = document.createElement('button')
-      addButtonEl.innerText = 'Add Event'
-      addButtonEl.addEventListener('click', function () {
-        const title = prompt('Enter event title:')
-        const start = prompt('Enter event start date (YYYY-MM-DD):')
-        const end = prompt('Enter event end date (YYYY-MM-DD):')
-
-        calendar.addEvent({
-          title: title,
-          start: start,
-          end: end
-        })
-      })
-
-      const toolbarEl = calendarEl.querySelector('.fc-toolbar')
-      toolbarEl.appendChild(addButtonEl)
+                    {
+                        title: 'My Event',
+                        start: '05-11-2023'
+                    }
+                ],
+                 dayMaxEventRows: true, // for all non-TimeGrid views
+                 views: {
+                timeGrid: {
+                dayMaxEventRows: 6 // adjust to 6 only for timeGridWeek/timeGridDay
+                }
+            },
+            
+                eventClick: function(info) {
+                    alert('Event: ' + info.event.title);
+                    // change the border color just for fun
+                    info.el.style.borderColor = 'red';
+                }
     })
-  </script>
+    calendar.render()
+
+    const addButtonEl = document.createElement('button')
+    addButtonEl.innerText = 'Add Event'
+    addButtonEl.addEventListener('click', function () {
+      const title = prompt('Enter event title:')
+      const start = prompt('Enter event start date (YYYY-MM-DD):')
+      const eventEnd = new Date(start);
+      eventEnd.setDate(eventEnd.getDate() + 1);
+      calendar.addEvent({
+        title: title,
+        start: start,
+        end: eventEnd
+      })
+    })
+
+    const toolbarEl = calendarEl.querySelector('.fc-toolbar')
+    toolbarEl.appendChild(addButtonEl)
+  })
+</script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/app.js"></script>
     <!-- socket.io -->

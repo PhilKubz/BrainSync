@@ -29,7 +29,8 @@
         const title = prompt('Enter event title:')
         const start = prompt('Enter event start date (YYYY-MM-DD):')
         const end = prompt('Enter event end date (YYYY-MM-DD):')
-
+        const end = new Date(start);
+        end.setDate(end.getDate() + 1);
         calendar.addEvent({
           title: title,
           start: start,
